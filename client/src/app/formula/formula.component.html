@@ -1,0 +1,99 @@
+<div class="container"  >
+  <div class="row">
+    <div class="col-md-6 mt-5 mx-auto">
+      <h1 id="title" class="h3 mb-3 font-weight-normal">MODIFICA FORMULA</h1>
+          <form *ngIf="!isStudent">
+            <div id="da"  class="form-group" *ngIf="materii">
+              <label id="label" for="type">Alege materia</label>
+              <select [(ngModel)]="materia" type="text" class="form-control" name="materia">
+                <option label=" "></option>
+                <option *ngFor="let item of materii.subject_name">
+                  {{item.subject_name}}
+                </option>
+              </select>
+            </div><br>
+
+            <div id="da">
+            <form  style="font-family:'Raleway', sans-serif; color:#4C4D62; ">
+              <div class="form-group">
+                <label for="options">Tipuri de notare:</label>
+                <div *ngFor="let option of options">
+                    <label>
+                        <input (change) = "execute()" type="checkbox"
+                               name="options"
+                               value="{{option.value}}"
+                               [(ngModel)]="option.checked"/>
+                        {{option.name}}
+                    </label>
+                </div>
+              </div>
+
+              <div *ngFor="let i of alese" id="da" class="form-group">
+                <div *ngIf="i=='T'">
+                    <label id="label"   for="type">Cate {{i}}:</label>
+                    <input   [(ngModel)]="cate.T" type="text" class="form-control" name="formula"></div>
+                <div *ngIf="i=='H'">
+                  <label id="label"   for="type">Cate {{i}}:</label>
+                  <input   [(ngModel)]="cate.H" type="text" class="form-control" name="formula"></div>
+                <div *ngIf="i=='A'">
+                <label id="label"   for="type">Cate {{i}}:</label>
+                <input   [(ngModel)]="cate.A" type="text" class="form-control" name="formula"></div>
+              </div><br>
+
+              <label id="label">Conditii de promovare:</label>
+            </form></div>
+            <form #conditieForm="ngForm"  >
+              <div class="row justify-content-center">
+                <div class="col-8">
+                  <button style="background-color:#765FB7 ;border-color:#765FB7"type="button" class="btn btn-danger btn-sm" (click)="addConditie()">+</button>
+                  <section class="container border mb-4" *ngFor="let conditie of conditii; let i = index;">
+                    <div class="row">
+
+                      <div class="col-12 text-right">
+                          <button style="background-color:#765FB7; border-color:#765FB7"type="button" class="btn btn-danger btn-sm" (click)="removeConditie(i)">x</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-7">
+                          <div class="form-group">
+                              <input class="form-control"  type="text"  [(ngModel)]="conditie.conditie" name="conditie_{{conditie.id}}" placeholder="C{{i+1}}"/>
+                            </div>
+                          </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </form>
+
+
+            <div id="da">
+            <label id="label"  for="formula">Adauga formula(+exemple)</label>
+            <input [(ngModel)]="formula" type="text" class="form-control" name="formula"></div>
+            <br>
+            <div id="da" class="form-group">
+              <label id="label"   for="type">Modalitate aflare nota finala</label>
+              <select  [(ngModel)]="aprox" type="text" class="form-control" name="materia">
+                <option></option>
+                <option>
+                  Gauss
+                </option>
+                <option>
+                  Aproximare prin trunchiere
+                </option>
+                <option>
+                  Aproximare prin adaos
+                </option>
+              </select>
+            </div><br>
+          <button id="button" (click)="selectedOptions()" (click)="sendFormula(details['email'],materia,alese,cate,conditii,formula,aprox)" type="submit" class="btn btn-lg btn-primary btn-block">MODIFICA FORMULA</button><br><br>
+        </form>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<!--{{conditii|json}}-->
+<!--Alese:{{alese}}
+{{cate.T}}
+{{cate.H}}
+{{cate.A}}-->

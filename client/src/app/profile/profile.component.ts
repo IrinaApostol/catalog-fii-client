@@ -1,17 +1,28 @@
-import {Component} from '@angular/core'
-import {AuthenticationService, UserDetails} from '../authentication.service'
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService, UserDetails } from '../authentication.service';
 
 @Component({
-    templateUrl:'./profile.component.html'
-})
-export class ProfileComponent{
-    details:UserDetails
-    constructor(private auth:AuthenticationService)
-    {}
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 
-    ngOnInit()
-    {
-        this.details=this.auth.getUserDetails();
-        this.details = this.details['identity'];
-    }
+})
+export class ProfileComponent implements OnInit {
+  details: UserDetails;
+  constructor(private auth: AuthenticationService) { }
+type: string;
+ceva: any;
+  ngOnInit() {
+    this.details = this.auth.getUserDetails();
+    this.details = this.details['identity'];
+    this.type = localStorage.getItem('type');
+    this.ceva=this.auth.user
+  }
+  get isStudent(): boolean {
+    return localStorage.getItem('type') === 'students';
+  }
+
+
+
 }
+
+

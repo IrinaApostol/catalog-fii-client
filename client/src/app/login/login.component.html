@@ -1,18 +1,26 @@
 <div class="container">
     <div class="row">
       <div class="col-md-6 mt-5 mx-auto">
-        <form (submit)="login()">
-          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
-          </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+        <h1 id="title" class="h3 mb-3 font-weight-normal"><b>LOG IN</b></h1>
+        <form (submit)="login()"  >
+          <div id="da">
+          <label id="label" for="type">Type</label>
+            <select  type="text" class="form-control" name="an"[(ngModel)]="credentials.type">
+              <option value="students">Student</option>
+              <option value="professors">Profesor</option>
+            </select>
+          </div><br>
+          <div id="da" class="form-group">
+            <label id="label" for="email">Email address</label>
+            <input id="input" type="email" class="form-control" name="email"  [(ngModel)]="credentials.email">
+          </div><br>
+          <div id="da" class="form-group">
+            <label id="label" for="password">Password</label>
+            <input type="password" class="form-control" name="password"  [(ngModel)]="credentials.password">
+          </div><br>
+          <button type="submit" id ="button" class="btn btn-lg btn-primary btn-block" >LOG IN</button>
         </form>
       </div>
     </div>
   </div>
+

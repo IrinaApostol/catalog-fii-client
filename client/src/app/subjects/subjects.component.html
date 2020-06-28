@@ -1,0 +1,171 @@
+<div  class="container">
+  <div class="row">
+    <div class="col-md-6 mt-5 mx-auto">
+      <h1 *ngIf="isStudent" id="title" class="h3 mb-3 font-weight-normal">VEZI NOTE</h1>
+      <form *ngIf="isStudent">
+          <div id="da"class="form-group"*ngIf="materii">
+            <label id="label"  for="type">Alege materia</label>
+            <select  [(ngModel)]="subject" type="text" class="form-control" name="materia">
+              <option></option>
+              <option *ngFor="let item of materii.subject_name">
+                {{item.subject_name}}
+              </option>
+            </select>
+          </div><br>
+          <button id="button"(click)="sendStudSubject()"class="btn btn-lg btn-primary btn-block" >AFISARE NOTE</button>
+          <!--p *ngIf="note">{{note | json}}</p-->
+        </form>
+    </div>
+  </div>
+  <br><br>
+  <div *ngIf="isStudent" class="container" style="text-align:center;" >
+    <div *ngIf="note.grade.length > 0 ">
+
+      <table  *ngFor="let item of note.grade" class="table table-hover table" style="text-align:center">
+    <thead>
+      <tr>
+        <th *ngIf="item.homework"  style="text-align:center;">Teme</th>
+        <th *ngIf="item.laboratory_test" style="text-align:center;">Teste Laborator</th>
+        <th *ngIf="item.laboratory_score" style="text-align:center;">Punctaje Laborator</th>
+        <th *ngIf="item.exam" style="text-align:center;">Examen</th>
+        <th *ngIf="item.partial" style="text-align:center;">Partial</th>
+        <th *ngIf="item.project" style="text-align:center;">Proiect</th>
+        <th *ngIf="item.bonus" style="text-align:center;">Bonus</th>
+        <th  style="text-align:center;">Media Actuala</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td *ngIf="item.homework">
+        <table class="table table-hover">
+        <thead>
+          <tr>
+            <th *ngFor="let valH1 of item.homework.keys">H{{valH1}}</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td *ngFor="let valH2 of item.homework.values">{{valH2}}</td>
+        </tr>
+    </table>
+   </td>
+        <td *ngIf="item.laboratory_test">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th *ngFor="let valT1 of item.laboratory_test.keys">LT{{valT1}}</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+            <td *ngFor="let valT2 of item.laboratory_test.values">{{valT2}}</td>
+          </tr>
+        </table>
+      </td>
+      <td *ngIf="item.laboratory_score">
+        <table class="table table-hover">
+        <thead>
+          <tr>
+            <th *ngFor="let valuare of item.laboratory_score.keys">LS{{valuare}}</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <td *ngFor="let valuare2 of item.laboratory_score.values">{{valuare2}}</td>
+      </tr>
+    </table>
+   </td>
+        <td *ngIf="item.exam"  style="text-align:center;">{{item.exam}}</td>
+        <td *ngIf="item.partial"  style="text-align:center;">{{item.partial}}</td>
+        <td *ngIf="item.project"  style="text-align:center;">{{item.project}}</td>
+        <td *ngIf="item.bonus"  style="text-align:center;">{{item.bonus}}</td>
+        <td   style="text-align:center;">{{note.finalgrade}}</td>
+      </tr>
+    </tbody>
+   </table>
+
+
+    <div class="jumbotron" style="background-color: white;">
+      <div class="col-sm-8 mx-auto">
+        <h1 id="title" class="h3 mb-3 font-weight-normal">PREZENTE</h1>
+      </div>
+      <table   id="table" *ngIf="isStudent" class="table mx-auto">
+        <tr *ngFor="let item of note.present">
+          <td  ><b>{{item}}</b></td>
+        </tr>
+        <tr>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+   <div class="row">
+    <div class="col-md-6 mt-5 mx-auto">
+      <h1  *ngIf="!isStudent" id="title" class="h3 mb-3 font-weight-normal">ADAUGA NOTE</h1>
+      <form *ngIf="!isStudent">
+
+        <div id="da" class="form-group" *ngIf="materii">
+            <label  for="type">Alege materia</label>
+            <select [(ngModel)]="subject"  type="text" class="form-control" name="materia" (change) = "execute()">
+              <option></option>
+              <option *ngFor="let item of materii.subject_name">
+                {{item.subject_name}}
+              </option>
+            </select>
+          </div>
+          <div id="da" class="form-group" *ngIf="grupe"><br>
+            <label  for="type">Alege grupa</label>
+            <select [(ngModel)]="g" type="text" class="form-control" name="grupa">
+              <option></option>
+              <option *ngFor="let i of grupe.list_group" >  {{i.group}}</option>
+            </select>
+          </div><br>
+          <div id="da" class="form-group">
+           <label  for="type">Alege tipul notei</label>
+           <select [(ngModel)]="gradeType" type="text" class="form-control" name="tip nota">
+                <option value="Laborator">Laborator</option>
+                <option value="Tema">Tema</option>
+                <option value="Examen">Examen</option>
+                <option value="Partial">Partial</option>
+                <option value="Bonus">Bonus</option>
+                <option value="Test Laborator">Test Laborator</option>
+                <option value="Proiect">Proiect</option>
+           </select></div><br>
+    <div *ngIf="gradeType=='Laborator' || gradeType=='Tema' ||gradeType=='Test Laborator'" id="da" class="form-group">
+          <label label for="labnumber">Numar lab/tema/examen</label>
+          <input type="text" class="form-control" name="labNo"  [(ngModel)]="numbr"><br></div>
+          <button id="button" (click)="sendGradeInfo()" class="btn btn-lg btn-primary btn-block" >VEZI LISTA DE STUDENTI</button>
+      </form>
+    </div>
+  </div>
+</div><br>
+
+
+
+
+
+
+
+
+
+<div [formGroup]="formGroup">
+    <table id="table" class="table col-md-6 mx-auto" *ngIf="listaSt">
+      <thead>
+        <td>Nume</td>
+        <td>Nota</td>
+      </thead>
+      <tbody formArrayName="values">
+        <tr *ngFor="let item of listaSt.response; index as x" >
+          <td style="text-transform: capitalize; ">{{item.first_name}} {{item.last_name}}</td>
+          <td > <input class="form-control" [formControlName]="x"></td>
+        </tr>
+      </tbody>
+    </table>
+    <button id="button"  class="btn btn-lg btn-primary btn-block" *ngIf="listaSt" (click)="info()">TRIMITE NOTE STUDENTI</button>
+<br>
+    <p style="text-align: center;" *ngIf="response"><b>{{response.response }}</b></p>
+    <br>
+</div>

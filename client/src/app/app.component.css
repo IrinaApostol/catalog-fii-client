@@ -1,0 +1,15 @@
+
+@font-face {
+  font-family: 'Raleway', sans-serif;
+  src: url(https://fonts.googleapis.com/css2?family=Raleway:wght@700;900&family=Roboto:wght@300&display=swap);
+}
+
+.nav-item:hover {
+  border-bottom: 1px solid currentColor;
+}
+.nav-item{
+  font-family: 'Raleway', sans-serif;
+}
+.navbar {
+  background-color: white !important;
+}

@@ -1,21 +1,56 @@
 <div class="container">
-    <div class="jumbotron mt-5">
-      <div class="col-sm-8 mx-auto">
-        <h1 class="text-center">PROFILE</h1>
-      </div>
-      <table class="table col-md-6 mx-auto">
-        <tr>
-          <td>First Name</td>
-          <td>{{ details['first_name'] }}</td>
-        </tr>
-        <tr>
-          <td>Last Name</td>
-          <td>{{ details['last_name'] }}</td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td>{{ details['email'] }}</td>
-        </tr>
-      </table>
+  <div class="jumbotron" style="background-color: white;">
+    <div class="col-sm-8 mx-auto">
+      <h1 id="title" class="h3 mb-3 font-weight-normal">PROFILE</h1>
     </div>
+    <table   id="table" *ngIf="isStudent" class="table col-md-6 mx-auto">
+      <tr>
+        <td  ><b>First Name</b></td>
+        <td style="text-transform: capitalize;">{{ details['first_name'] }}</td>
+      </tr>
+      <tr>
+        <td><b>User Type</b></td>
+        <td> {{type}} </td>
+      </tr>
+      <tr>
+        <td><b>Last Name</b></td>
+        <td style="text-transform: capitalize;">{{ details['last_name'] }}</td>
+      </tr>
+      <tr>
+        <td><b>Email</b></td>
+        <td>{{ details['email'] }}</td>
+      </tr>
+      <tr>
+        <td><b>An</b></td>
+        <td>{{ details['year'] }}</td>
+      </tr>
+
+      <tr>
+        <td><b>Grupa</b></td>
+        <td>{{ details['group'] }}</td>
+      </tr>
+
+      <tr>
+        <td><b>Numar Matricol</b></td>
+        <td style="text-transform: capitalize;" >{{ details['registration_number'] }}</td>
+      </tr>
+    </table>
+    <table  id="table"  *ngIf="!isStudent" class="table col-md-6 mx-auto">
+      <tr>
+        <td><b>First Name</b></td>
+        <td>{{ details['first_name'] }}</td>
+      </tr>
+
+      <tr>
+        <td><b>Last Name</b></td>
+        <td>{{ details['last_name'] }}</td>
+      </tr>
+      <tr>
+        <td><b>Email</b></td>
+        <td>{{ details['email'] }}</td>
+      </tr>
+    </table>
   </div>
+</div>
+<!--{{ceva.identity.email}}
+{{ceva.identity.first_name}}-->

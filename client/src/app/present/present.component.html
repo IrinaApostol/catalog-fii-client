@@ -1,0 +1,49 @@
+ <div class="container"  >
+    <div class="row">
+      <div class="col-md-6 mt-5 mx-auto">
+        <form  *ngIf="isStudent"  (submit)="present()">
+          <h1 id="title" class="h3 mb-3 font-weight-normal">PREZENTE</h1>
+          <div id="da" class="form-group">
+            <label id="label" for="name">Enter code</label>
+            <input  type="text" class="form-control" [(ngModel)]="creds.codIntrodus"  name="code" placeholder="Enter code" >
+          </div><br>
+          <button id="button" type="submit" class="btn btn-lg btn-primary btn-block">TRIMITE</button><br>
+          <p style="text-align: center;" *ngIf="mesaj">{{mesaj.mesaj}}</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mt-5 mx-auto">
+        <form *ngIf="!isStudent">
+          <h1  *ngIf="!isStudent" id="title" class="h3 mb-3 font-weight-normal">GENEREAZA COD PREZENTA</h1>
+            <div id="da"  class="form-group" *ngIf="materii">
+              <label id="label" for="type">Alege materia</label>
+              <select   [(ngModel)]="materie" type="text" class="form-control" name="materia">
+                <option label=" "></option>
+                <option *ngFor="let item of materii.subject_name">
+                  {{item.subject_name}}
+                </option>
+              </select>
+            </div ><br>
+            <div id="da"  class="form-group">
+            <label  id="label" for="type">Alege tipul prezentei</label>
+             <select type="text"   [(ngModel)]="tipOra"  class="form-control" name="tip nota">
+                  <option value="Laborator/Seminar">Laborator/Seminar</option>
+                  <option value="Curs">Curs</option>
+                  <option value="Consultatie">Consultatie</option>
+             </select>
+            </div><br>
+            <div id="da"  class="form-group">
+            <label id="label" for="labnumber">Numarul lab/sem/curs/cons</label>
+            <input  [(ngModel)]="nrOra" type="text" class="form-control" name="classNo">
+            <br>
+          <button  id="button"(click)="sendPresenceInfo(details['email'],materie,tipOra,nrOra)"  type="submit" class="btn btn-lg btn-primary btn-block">GENEREAZA COD</button>
+       <br><p style="text-align: center;" *ngIf="code"><b>{{code.cod_prezenta}}</b></p></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
